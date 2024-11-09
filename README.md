@@ -53,8 +53,6 @@
 
 ## Пример использования:
 
-Пример 1:
-
 ```cpp
 #include <CalcGraph/CalcGraph.hpp>
 #include <iostream>
@@ -64,7 +62,7 @@
 
 int main(){
 	CalcGraph graph;
-	auto func = graph.Parse("(x*x*x+4)/(x*x*x)");
+	auto func = graph.Parse("(x*x*x+4)/(x*x*x)"); // y = (x^3 + 4) / x^3
 	for(float x = -5.f; x < 5.f; x+=0.5f){
 		std::cout << "x: " << std::setw(4) << x << " func: " << func(x) << std::endl;
 	}
@@ -99,3 +97,16 @@ x:  4.5 func: 1.0439
 Результат Desmos (y = (x^3 + 4) / x^3):
 
 ![image](pics/desmos.png)
+
+## Сборка
+
+- Для сборки проекта требуется наличие компилятора со стандартом `C++20` и CMake с минимальной версией `3.10`, также необходимо выполнить следующие команды.
+
+```bash
+git clone https://github.com/Gigachader007/SmartCalculator
+cd SmartCalculator
+mkdir build && cd build
+cmake ..
+make
+```
+
