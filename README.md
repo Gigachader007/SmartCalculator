@@ -96,6 +96,6 @@ x:    4 func: 1.0625
 x:  4.5 func: 1.0439
 ```
 
-Результат Desmos:
+Результат Desmos (y = (x^3 + 4) / x^3):
 
 ![image](pics/desmos.png)
