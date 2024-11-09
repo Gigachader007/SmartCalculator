@@ -110,3 +110,11 @@ cmake ..
 make
 ```
 
+## Исполнение
+
+Просто из `build` запустите `SmartCalc`
+
+```bash
+./SmartCalc
+```
+
