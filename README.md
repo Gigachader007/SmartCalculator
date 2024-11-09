@@ -98,4 +98,4 @@ x:  4.5 func: 1.0439
 
 Результат Desmos:
 
-![image](pic/desmos.png)
+![image](pics/desmos.png)
