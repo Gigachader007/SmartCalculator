@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 
 #include "CalcGraph/CalcGraph.hpp"
@@ -52,4 +53,33 @@ int main(){
         std::cin >> x;
         std::cout << "Результат: " << res_func(x) << std::endl;
     }
+}
+*/
+#include <CalcGraph/CalcGraph.hpp>
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+int main(){
+	CalcGraph graph;
+	graph.Register("cos",   [](const float t) -> const float {return std::cos(t);});
+	graph.Register("sin",   [](const float t) -> const float {return std::sin(t);});
+	graph.Register("tg",    [](const float t) -> const float {return std::tan(t);});
+	graph.Register("ctg",   [](const float t) -> const float {return std::tan(3.14159265358 / 2.0 - t);}); //ctg(x) = tg(pi/2 - x)
+	graph.Register("ln",    [](const float t) -> const float {return std::log(t);});
+	graph.Register("exp",   [](const float t) -> const float {return std::exp(t);});
+	graph.Register("cosh",  [](const float t) -> const float {return std::cosh(t);});
+	graph.Register("sinh",  [](const float t) -> const float {return std::sinh(t);});
+	graph.Register("tanh",  [](const float t) -> const float {return std::tanh(t);});
+	graph.Register("coth",  [](const float t) -> const float {return 1.f / std::tanh(t);});
+	graph.Register("sqrt",  [](const float t) -> const float {return std::sqrt(t);});
+	graph.Register("arcsin",[](const float t) -> const float {return std::asin(t);});
+	graph.Register("arccos",[](const float t) -> const float {return std::acos(t);});
+	graph.Register("arctg", [](const float t) -> const float {return std::atan(t);});
+	graph.Register("arcctg",[](const float t) -> const float {return 3.14159265358 / 2.0 - std::atan(t);});
+
+	auto func = graph.Parse("(x*x*x+4)/(x*x*x)");
+	for(float x = -5.f; x < 5.f; x+=0.5f){
+		std::cout << "x: " << std::setw(4) << x << " func: " << func(x) << std::endl;
+	}
 }
