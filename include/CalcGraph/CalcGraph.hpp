@@ -5,6 +5,7 @@
 #include <functional>
 #include <algorithm>
 #include <map>
+#include <cmath>
 
 typedef std::function<const float(const float)> math_func_t;
 
