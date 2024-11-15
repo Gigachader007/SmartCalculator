@@ -27,9 +27,9 @@ public:
         //2. умножение/деление
         //3. сложение/вычитание
         {
-            auto i = 0;
             auto counter = 0;
-            for(auto sym : line){
+            for(int i = int(line.size())-1; i >= 0; i--){
+                auto sym = line[i];
                 if((sym == '+' || sym == '-') && counter == 0){
                     auto sub_line1 = line.substr(0,i);
                     auto sub_line2 = line.substr(i+1,line.length());
@@ -44,21 +44,20 @@ public:
                         };
                     }
                 }
-                if(counter < 0){
-                    throw std::runtime_error("Очень много закрытых скобок!");
+                if(counter > 0){
+                    throw std::runtime_error("Очень много открытых скобок!");
                 }
                 if(sym == '(') counter++;
                 if(sym == ')') counter--;
-                i++;
             }
-            if(counter > 0){
-                throw std::runtime_error("Очень много незакрытых скобок!");
+            if(counter < 0){
+                throw std::runtime_error("Очень много закрытых скобок!");
             }
         }
         {
-            auto i = 0;
             auto counter = 0;
-            for(auto sym : line){
+            for(int i = int(line.size())-1; i >= 0; i--){
+                auto sym = line[i];
                 if((sym == '*' || sym == '/') && counter == 0){
                     auto sub_line1 = line.substr(0,i);
                     auto sub_line2 = line.substr(i+1,line.length());
@@ -78,7 +77,6 @@ public:
                 }
                 if(sym == '(') counter++;
                 if(sym == ')') counter--;
-                i++;
             }
             if(counter > 0){
                 throw std::runtime_error("Очень много незакрытых скобок!");
