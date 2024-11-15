@@ -59,7 +59,7 @@ public:
             auto counter = 0;
             for(int i = int(line.size())-1; i >= 0; i--){
                 auto sym = line[i];
-                if((sym == '*' || sym == '/') && counter == 0){
+                if((sym == '*' || sym == '/' || sym == '^') && counter == 0){
                     auto sub_line1 = line.substr(0,i);
                     auto sub_line2 = line.substr(i+1,line.length());
                     if(sym == '*'){
@@ -70,6 +70,11 @@ public:
                     if(sym == '/'){
                         return [=, self = this](const float t) -> const float {
                             return self->Parse(sub_line1)(t) / self->Parse(sub_line2)(t);
+                        };
+                    }
+                    if(sym == '^'){
+                        return [=, self = this](const float t) -> const float {
+                            return std::pow(self->Parse(sub_line1)(t),self->Parse(sub_line2)(t));
                         };
                     }
                 }
