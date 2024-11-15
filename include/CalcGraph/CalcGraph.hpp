@@ -34,7 +34,6 @@ public:
                     auto sub_line1 = line.substr(0,i);
                     auto sub_line2 = line.substr(i+1,line.length());
                     if(sub_line1.empty()) sub_line1 = "0";
-                    if(sub_line2.empty()) sub_line2 = "0";
                     if(sym == '+'){
                         return [=, self = this](const float t) -> const float {
                             return self->Parse(sub_line1)(t) + self->Parse(sub_line2)(t);
