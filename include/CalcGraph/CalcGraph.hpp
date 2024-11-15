@@ -72,13 +72,13 @@ public:
                         };
                     }
                 }
-                if(counter < 0){
+                if(counter > 0){
                     throw std::runtime_error("Очень много закрытых скобок!");
                 }
                 if(sym == '(') counter++;
                 if(sym == ')') counter--;
             }
-            if(counter > 0){
+            if(counter < 0){
                 throw std::runtime_error("Очень много незакрытых скобок!");
             }
         }
