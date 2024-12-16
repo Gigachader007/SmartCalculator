@@ -19,8 +19,7 @@ public:
         functions[name] = func;
     }
 
-    std::function<const float(const float)> Parse(std::string line){
-        line.erase(std::remove_if(line.begin(),line.end(),[](const unsigned char t){return std::isspace(t);}),line.end());
+    std::function<const float(const float)> Parse(const std::string& line){
         if(line == ""){
             throw std::runtime_error("Передача пустой строки!");
         }
