@@ -76,6 +76,7 @@ public:
                     }
                     if(sym == '^'){
                         return [=, self = this](const float t) -> const float {
+                            // 0 ^ 0 = 1 :D
                             return std::pow(self->Parse(sub_line1)(t),self->Parse(sub_line2)(t));
                         };
                     }
