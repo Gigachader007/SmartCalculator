@@ -4,13 +4,13 @@
 #include <string>
 #include <functional>
 #include <algorithm>
-#include <map>
+#include <unordered_map>
 #include <cmath>
 
 typedef std::function<const float(const float)> math_func_t;
 
 class CalcGraph final {
-    std::map<std::string,math_func_t> functions;
+    std::unordered_map<std::string,math_func_t> functions;
 public:
     CalcGraph(){}
     ~CalcGraph(){}
@@ -103,7 +103,7 @@ public:
                 auto sss = line.substr(0,line.find_first_of('('));
                 if(sss.empty()) break;
                 func_found = false;
-                if(sss == name){ //my function name and function name in std::map
+                if(sss == name){ //my function name and function name in std::unordered_map
                     func_found = true;
                     return [=, self = this](const float t) -> const float{
                         return func(self->Parse(line.substr(name.size(),line.size()-1))(t));
