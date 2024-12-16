@@ -70,7 +70,9 @@ public:
                     }
                     if(sym == '/'){
                         return [=, self = this](const float t) -> const float {
-                            return self->Parse(sub_line1)(t) / self->Parse(sub_line2)(t);
+                            auto tmp = self->Parse(sub_line2)(t);
+                            if(tmp == 0.0) throw std::runtime_error("Деление на 0!");
+                            return self->Parse(sub_line1)(t) / tmp;
                         };
                     }
                     if(sym == '^'){

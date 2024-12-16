@@ -4,12 +4,22 @@
 
 #include <cmath>
 
+
+const float Pi = 3.14159265358;
+
 int main(){
+    
     CalcGraph graph;
     graph.Register("cos",   [](const float t) -> const float {return std::cos(t);});
     graph.Register("sin",   [](const float t) -> const float {return std::sin(t);});
-    graph.Register("tg",    [](const float t) -> const float {return std::tan(t);});
-    graph.Register("ctg",   [](const float t) -> const float {return std::tan(3.14159265358 / 2.0 - t);}); //ctg(x) = tg(pi/2 - x)
+    graph.Register("tg",    [](const float t) -> const float {
+        if(Pi*int((t - (Pi/2.0))/Pi) == t - (Pi/2.0)) throw std::runtime_error("тангенс не определён!");
+        return std::tan(t);
+    });
+    graph.Register("ctg",   [](const float t) -> const float {
+        if(Pi*int(t/Pi) == t) throw std::runtime_error("котангенс не определён!");
+        return std::tan((Pi/2.0) - t);
+    }); //ctg(x) = tg(pi/2 - x)
     graph.Register("ln",    [](const float t) -> const float {return std::log(t);});
     graph.Register("exp",   [](const float t) -> const float {return std::exp(t);});
     graph.Register("cosh",  [](const float t) -> const float {return std::cosh(t);});
@@ -32,7 +42,7 @@ int main(){
             auto c1 = function_line[std::min(std::max(i-1,0),(int)function_line.size()-1)];
             auto c2 = function_line[std::min(std::max(i+1,0),(int)function_line.size()-1)];
             for(auto j : {c1,c2}){
-                if(j == '+' || j == '-' || j == ')' || j == '(' || j == '*' || j == '/'){
+                if(j == '+' || j == '-' || j == ')' || j == '(' || j == '*' || j == '/' || j == '^'){
                     flag = true;
                     break;
                 }
