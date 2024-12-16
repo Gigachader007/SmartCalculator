@@ -70,14 +70,18 @@ public:
                     if(sym == '/'){
                         return [=, self = this](const float t) -> const float {
                             auto tmp = self->Parse(sub_line2)(t);
-                            if(tmp == 0.0) throw std::runtime_error("Деление на 0!");
+                            if(tmp == 0.f) throw std::runtime_error("Деление на 0!");
                             return self->Parse(sub_line1)(t) / tmp;
                         };
                     }
                     if(sym == '^'){
                         return [=, self = this](const float t) -> const float {
+                            auto a = self->Parse(sub_line1)(t);
+                            auto b = self->Parse(sub_line2)(t);
                             // 0 ^ 0 = 1 :D
-                            return std::pow(self->Parse(sub_line1)(t),self->Parse(sub_line2)(t));
+                            if(a == 0.f && b < 0.f) throw std::runtime_error("Нельзя возвести 0 в отрицательную степень!");
+                            if(a < 0.f && b != float(int(b))) throw std::runtime_error("Нельзя отрицательные числа в нецелую степерь возводить!");
+                            return std::pow(a,b);
                         };
                     }
                 }
